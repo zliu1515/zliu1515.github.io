@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Research | Zhihui Liu</title>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700
+        &family=Merriweather:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    /* ── Page Header ──
+       Matches exact gradient used in teaching.html */
+    .page-header {
+      background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+      color: #fff;
+      padding: 3rem 0 2.5rem;
+    }
+    .page-header h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 700px;
+      line-height: 1.7;
+    }
+
+    /* ── Stats Bar ──
+       Matches teaching.html stats bar exactly */
+    .stats-bar {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .stat-item {
+      background: var(--primary);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-light);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.8);
+      margin-top: 0.2rem;
+    }
+
+    /* ── Philosophy/Note Box ──
+       Matches teaching.html philosophy box */
+    .note-box {
+      background: #eaf4fb;
+      border-left: 4px solid var(--accent);
+      padding: 1.2rem 1.5rem;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: var(--text);
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+    }
+    .note-box i {
+      color: var(--accent);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── Research Interest Tags ── */
+    .interest-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+    .interest-tag {
+      background: #eaf4fb;
+      color: var(--primary);
+      border: 1.5px solid var(--accent-light);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* ── Section Divider ──
+       Matches teaching.html course-section-label */
+    .year-divider {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 2rem 0 1rem;
+    }
+    .year-divider h3 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.05rem;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+    .year-divider::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    /* ── Publication Card ──
+       Matches teaching.html course-card style */
+    .pub-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      display: flex;
+      gap: 1rem;
+      padding: 1.2rem 1.3rem;
+      border-left: 4px solid var(--accent);
+    }
+    .pub-card:hover {
+      border-color: var(--accent);
+      border-left-color: var(--primary);
+      box-shadow: 0 4px 18px rgba(46,134,193,0.15);
+    }
+
+    /* Number bubble */
+    .pub-number {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .pub-content { flex: 1; }
+
+    .pub-title {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+      line-height: 1.5;
+    }
+
+    .pub-authors {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 0.25rem;
+      line-height: 1.6;
+    }
+    .pub-authors .me {
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .pub-venue {
+      font-size: 0.85rem;
+      color: var(--text);
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .pub-venue strong {
+      font-style: normal;
+      color: var(--primary);
+    }
+
+    /* ── Badges ──
+       Matches teaching.html tag style */
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      border-radius: 4px;
+      margin-left: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      vertical-align: middle;
+      font-style: normal;
+    }
+    .badge-conf  { background: var(--accent);  color: #fff; }
+    .badge-ieee  { background: #e74c3c;         color: #fff; }
+
+    /* ── Smooth Scroll ── */
+    html { scroll-behavior: smooth; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .stats-bar   { gap: 0.7rem; }
+      .stat-item   { min-width: 100px; padding: 0.8rem; }
+      .stat-number { font-size: 1.4rem; }
+      .pub-card    { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR =====
+       Exact same structure as index.html [1] and teaching.html [2] -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="nav-brand" href="index.html">Zhihui Liu</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="research.html" class="active">Research</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="assets/files/cv.pdf" target="_blank">CV</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== PAGE HEADER =====
+       Same gradient style as teaching.html [2] -->
+  <section class="page-header">
+    <div class="container">
+      <h1>
+        <i class="fas fa-microscope"></i> Research
+      </h1>
+      <p>
+        My research spans <strong>cybersecurity</strong>,
+        <strong>machine learning</strong>, and
+        <strong>natural language processing</strong>, with a focus on
+        phishing detection, user authentication, music classification,
+        and biomedical signal processing.
+        I am a faculty member at
+        <strong>Texas A&amp;M University – Corpus Christi (TAMU-CC)</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <section class="section" id="research">
+    <div class="container">
+
+      <!-- ── Stats Bar ──
+           Same layout as teaching.html stats [2] -->
+      <div class="stats-bar">
+        <div class="stat-item">
+          <span class="stat-number">6</span>
+          <div class="stat-label">Publications</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">5</span>
+          <div class="stat-label">Conference Papers</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">3</span>
+          <div class="stat-label">IEEE Publications</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">2017–2023</span>
+          <div class="stat-label">Active Years</div>
+        </div>
+      </div>
+
+      <!-- ── Research Interests ──
+           Pulled from index.html profile [1] -->
+      <h2 class="section-title">Research Interests</h2>
+      <div class="interest-tags">
+        <span class="interest-tag">Machine Learning</span>
+        <span class="interest-tag">Deep Learning</span>
+        <span class="interest-tag">Natural Language Processing</span>
+        <span class="interest-tag">Cybersecurity</span>
+        <span class="interest-tag">Phishing Detection</span>
+        <span class="interest-tag">User Authentication</span>
+        <span class="interest-tag">Music Classification</span>
+        <span class="interest-tag">Network Analysis</span>
+        <span class="interest-tag">Biomedical Signal Processing</span>
+        <span class="interest-tag">Social Media Analysis</span>
+      </div>
+
+      <!-- ── Note Box ──
+           Same style as teaching.html philosophy box [2] -->
+      <div class="note-box">
+        <i class="fas fa-info-circle"></i>
+        <div>
+          <strong>Zhihui Liu</strong> is underlined in all
+          author lists. Publications are listed in reverse
+          chronological order.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════
+           PUBLICATIONS LIST
+      ═══════════════════════════════════ -->
+      <h2 class="section-title">Publications</h2>
+
+      <!-- ════ 2023 ════ -->
+      <div class="year-divider">
+        <h3>
+          <i class="fas fa-calendar-alt"></i> &nbsp;2023
+        </h3>
+      </div>
+
+      <!-- [1] IEEE ISI 2023 -->
+      <div class="pub-card">
+        <div class="pub-number">1</div>
+        <div class="pub-content">
+          <div class="pub-title">
+            A Stage Model for Understanding Phishing
+            Victimization Behavior in Embedded Training
+          </div>
+          <div class="pub-authors">
+            Lina Z, Dongsong Z,
+            <span class="me">Zhihui Liu</span>
+          </div>
+          <div class="pub-venue">
+            <strong>2023 IEEE International Conference on
+            Intelligence and Security Informatics (ISI)</strong>.
+            IEEE, 2023.
+            <span class="badge badge-conf">Conference</span>
+            <span class="badge badge-ieee">IEEE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- [2] FTC 2023 -->
+      <div class="pub-card">
+        <div class="pub-number">2</div>
+        <div class="pub-content">
+          <div class="pub-title">
+            Utilizing Phonemes in Music Classification:
+            Do They Matter?
+          </div>
+          <div class="pub-authors">
+            Laurel Boykin Powell,
+            <span class="me">Zhihui Liu</span>
+          </div>
+          <div class="pub-venue">
+            <strong>Proceedings of the Future Technologies
+            Conference (FTC) 2023</strong>.
+            <span class="badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════ 2020 ════ -->
+      <div class="year-divider">
+        <h3>
+          <i class="fas fa-calendar-alt"></i> &nbsp;2020
+        </h3>
+      </div>
+
+      <!-- [3] PACIS 2020 -->
+      <div class="pub-card">
+        <div class="pub-number">3</div>
+        <div class="pub-content">
+          <div class="pub-title">
+            Effects of Demographic Factors on Phishing
+            Victimization in the Workplace
+          </div>
+          <div class="pub-authors">
+            <span class="me">Zhihui Liu</span>,
+            Lina Z, Dongsong Z
+          </div>
+          <div class="pub-venue">
+            <strong>The Pacific Asia Conference on
+            Information Systems (PACIS) 2020</strong>.
+            <span class="badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- [4] PACIS 2020 -->
+      <div class="pub-card">
+        <div class="pub-number">4</div>
+        <div class="pub-content">
+          <div class="pub-title">
+            What is More Important for Touch Dynamics
+            Based Mobile User Authentication?
+          </div>
+          <div class="pub-authors">
+            Kanlun W, Lina Z, Dongsong Z,
+            <span class="me">Zhihui Liu</span>,
+            Jaewan L
+          </div>
+          <div class="pub-venue">
+            <strong>The Pacific Asia Conference on
+            Information Systems (PACIS) 2020</strong>.
+            <span class="badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════ 2019 ════ -->
+      <div class="year-divider">
+        <h3>
+          <i class="fas fa-calendar-alt"></i> &nbsp;2019
+        </h3>
+      </div>
+
+      <!-- [5] IEEE ISI 2019 -->
+      <div class="pub-card">
+        <div class="pub-number">5</div>
+        <div class="pub-content">
+          <div class="pub-title">
+            Detection of Fraudulent Tweets: An Empirical
+            Investigation Using Network Analysis and
+            Deep Learning Technique
+          </div>
+          <div class="pub-authors">
+            Jaewan L,
+            <span class="me">Zhihui Liu</span>,
+            Lina Z
+          </div>
+          <div class="pub-venue">
+            <strong>2019 IEEE International Conference on
+            Intelligence and Security Informatics (ISI)</strong>.
+            IEEE, 2019.
+            <span class="badge badge-conf">Conference</span>
+            <span class="badge badge-ieee">IEEE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════ 2017 ════ -->
+      <div class="year-divider">
+        <h3>
+          <i class="fas fa-calendar-alt"></i> &nbsp;2017
+        </h3>
+      </div>
+
+      <!-- [6] IEEE EMBC 2017 -->
+      <div class="pub-card">
+        <div class="pub-number">6</div>
+        <div class="pub-content">
+          <div class="pub-title">
+            Comparison of Electrohysterogram Characteristics
+            During Uterine Contraction and Non-Contraction
+            During Labor
+          </div>
+          <div class="pub-authors">
+            <span class="me">Zhihui Liu</span>,
+            Dongmei H, et al.
+          </div>
+          <div class="pub-venue">
+            <strong>Engineering in Medicine and Biology
+            Society (EMBC), 39th Annual International
+            Conference of the IEEE</strong>,
+            pp. 2924–2927. IEEE, July 2017.
+            <span class="badge badge-conf">Conference</span>
+            <span class="badge badge-ieee">IEEE</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER =====
+       Exact same as index.html [1] and teaching.html [2] -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        © 2025 Zhihui Liu ·
+        Department of Computer Science ·
+        Texas A&amp;M University – Corpus Christi
+      </p>
+      <p>Last updated: June 2025</p>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT =====
+       Same mobile nav toggle as teaching.html [2] -->
+  <script>
+    // ── Mobile navbar toggle ──
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // ── Smooth scroll when clicking Research tab ──
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── Fade-in animation on pub cards ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity    = '1';
+          entry.target.style.transform  = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.quer
