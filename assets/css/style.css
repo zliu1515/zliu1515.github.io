@@ -82,11 +82,16 @@ a:hover { text-decoration: underline; }
 }
 
 /* HERO */
+
 .hero {
-  background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+  background-image: url('assets/images/background.jpg');
+  background-size: cover;        /* fills the whole area */
+  background-position: center;   /* centers the image */
+  background-repeat: no-repeat;  /* no tiling */
   color: #fff;
   padding: 4rem 0 3rem;
 }
+
 .hero-content {
   display: flex;
   gap: 3rem;
